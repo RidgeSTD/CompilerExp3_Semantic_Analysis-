@@ -1,0 +1,71 @@
+S function s_sub
+s_sub $
+s_sub function s_sub
+declaration_statement declaration ;
+declaration type IDN declaration_number declaration_list
+declaration_number [ int ] declaration_number
+declaration_number $
+declaration_list , IDN declaration_number declaration_list
+declaration_list $
+expression variable expression_sub
+expression CD expression_sub
+expression ( expression ) expression_sub
+expression_sub OP expression
+expression_sub $
+variable IDN variable_sub
+variable_sub [ variable_sub_sub
+variable_sub_sub int ] variable_sub
+variable_sub_sub IDN ] variable_sub
+variable_sub $
+OP +
+OP -
+OP *
+OP /
+OP %
+OP >
+OP <
+OP >=
+OP <=
+OP ==
+OP !=
+OP &&
+OP ||
+assignment_statement assign ;
+assign variable assign_sub
+assign_sub = expression
+assign_sub ++
+assign_sub --
+assign ++ variable
+assign -- variable
+control_statement break ;
+control_statement continue ;
+return_statement return return_sub ;
+return_sub expression
+return_sub $
+statement return_statement
+statement control_statement
+statement assignment_statement
+statement declaration_statement
+statement while_block
+statement if_block
+statement for_block
+statementlist statement statementlist
+statementlist $
+while_block while ( expression ) { statementlist }
+for_block for ( assign ; expression ; assign ) { statementlist }
+if_block if ( expression ) { statementlist } if_sub
+if_sub else { statementlist }
+if_sub $
+function type IDN ( parameterlist ) { statementlist }
+parameterlist $
+parameterlist type IDN parameterlist_sub
+parameterlist_sub , parameterlist
+parameterlist_sub $
+type INT
+type FLOAT
+type DOUBLE
+type CHAR
+type VOID
+CD int
+CD float
+CD double

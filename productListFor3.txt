@@ -1,0 +1,71 @@
+S function s_sub
+s_sub $
+s_sub function s_sub
+declaration_statement declaration ;
+declaration type _act_declaration_1 IDN _act_declaration_2 declaration_number _act_declaration_3 declaration_list
+declaration_number [ int _act_declaration_number_1 ]
+declaration_number $
+declaration_list , IDN _act_declaration_list_1 declaration_number _act_declaration_list_2 declaration_list
+declaration_list $
+expression _act_expression_2 variable _act_expression_4 expression_sub
+expression _act_expression_1 CD _act_expression_3 expression_sub
+expression ( expression ) _act_expression_5 expression_sub
+expression_sub OP _act_expression_sub_1 expression
+expression_sub $
+variable IDN _act_variable_1 variable_sub
+variable_sub [ variable_sub_sub
+variable_sub_sub int _act_variable_sub_sub_1 ] variable_sub
+variable_sub_sub IDN _act_variable_sub_sub_2 ] variable_sub
+variable_sub $
+OP +
+OP -
+OP *
+OP /
+OP %
+OP >
+OP <
+OP >=
+OP <=
+OP ==
+OP !=
+OP &&
+OP ||
+assignment_statement assign _act_assignment_statement_1 ;
+assign variable assign_sub
+assign_sub = _act_assign_sub_1 expression
+assign_sub ++
+assign_sub --
+assign ++ variable
+assign -- variable
+control_statement break ;
+control_statement continue ;
+return_statement return return_sub ;
+return_sub expression
+return_sub $
+statement return_statement
+statement control_statement
+statement assignment_statement
+statement declaration_statement
+statement while_block
+statement if_block
+statement for_block
+statementlist statement statementlist
+statementlist $
+while_block while ( expression _act_while_block_1 ) { statementlist _act_while_block_2 }
+for_block for ( assign ; expression ; assign ) { statementlist }
+if_block if ( expression _act_if_block_1 ) { statementlist _act_if_block_2 } if_sub
+if_sub else { statementlist _act_if_block_3 }
+if_sub $
+function type _act_function_1 IDN _act_function_2 ( parameterlist ) { statementlist }
+parameterlist $
+parameterlist type IDN parameterlist_sub
+parameterlist_sub , parameterlist
+parameterlist_sub $
+type INT _act_type_1
+type FLOAT _act_type_1
+type DOUBLE _act_type_1
+type CHAR _act_type_1
+type VOID _act_type_1
+CD int _act_cd_1
+CD float _act_cd_2
+CD double _act_cd_3

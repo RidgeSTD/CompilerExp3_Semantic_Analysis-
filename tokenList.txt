@@ -1,0 +1,14 @@
+INT int
+IDN main
+( -
+) -
+{ -
+INT int
+IDN a
+; -
+IDN a
+= -
+int 4
+; -
+} -
+# -
