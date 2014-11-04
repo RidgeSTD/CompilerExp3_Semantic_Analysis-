@@ -473,7 +473,10 @@ def analyseSyntax():
                 e_stack = []
                 
             elif x[1] == '_act_while_block_2':
-                dizhima[findLocationList.pop() - 1] += ('whileblock2华文澜回填'+str(len(dizhima)))
+                findLocationList_pop_tmp = findLocationList.pop()
+                dizhima.append('goto '+str(findLocationList_pop_tmp - 2))
+                dizhima[findLocationList_pop_tmp - 1] += str(len(dizhima))
+                
                 
             elif x[1] == '_act_if_block_1':
                 dizhima.append('if '+string.join(e_stack,'')+' goto ' + str(len(dizhima) + 2))
@@ -483,11 +486,10 @@ def analyseSyntax():
                 
             elif x[1] == '_act_if_block_2':
                 dizhima[findLocationList.pop() - 1] += str(len(dizhima) + 1)
-                dizhima.append('goto ')
+                dizhima.append('goto '+str(len(dizhima)+1))
                 findLocationList.append(len(dizhima))
             elif x[1] == '_act_if_block_3':
-                dizhima[findLocationList.pop() - 1] += str(len(dizhima))
-                print 'im here'
+                dizhima[findLocationList.pop() - 1] = 'goto '+str(len(dizhima))
             else:
                 print '喂，没有这个子程序啊：',x[1]
             
