@@ -8,6 +8,7 @@ Created on 2013-11-1
 @author: Jarel Zhou
 '''
 import string
+import LexicalParser
 
 tokenList = []
 terminalSignMap = {}
@@ -21,6 +22,7 @@ errorList = []
 fuhaoMap = {}
 currentTable = 'root'
 hasValueList = ['IDN','CHAR','INT','FLOAT','DOUBLE','VOID','int','float','double']
+dizhima = []
 
 def init():
 #    print '-----  init() start  -----'
@@ -48,13 +50,13 @@ def init():
     
 def initTokenList():
     global tokenList
-    f = open('tokenList.txt')
-    for line in f:
-        line=line.strip('\r\n')
-        if len(line) != 0:
-            splitLine = line.split(' ')
+    result = LexicalParser.main()
+    for eachline in result:
+        if len(eachline)!=0:
+            splitLine = eachline.split(' ')
             tokenList.append(Token(splitLine[0], splitLine[1]))
-
+            
+            
 def initTerminalSignMap():
     global terminalSignMap
     f = open('terminalSignList.txt')
@@ -295,6 +297,7 @@ def analyseSyntax():
     global fuhaoMap
     global currentTable
     global hasValueList
+    global dizhima
     
     stack = [['#'],['S']]
     i = 0
@@ -305,7 +308,6 @@ def analyseSyntax():
     e_stack = []
     currentTNumber = 1
     currentAssignTo = ''
-    dizhima = []
     findLocationList = []
 #    isError = False
     
