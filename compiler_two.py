@@ -473,7 +473,7 @@ def analyseSyntax():
                 e_stack = []
                 
             elif x[1] == '_act_while_block_2':
-                dizhima[findLocationList.pop() - 1] += str(len(dizhima))
+                dizhima[findLocationList.pop() - 1] += ('whileblock2华文澜回填'+str(len(dizhima)))
                 
             elif x[1] == '_act_if_block_1':
                 dizhima.append('if '+string.join(e_stack,'')+' goto ' + str(len(dizhima) + 2))
