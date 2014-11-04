@@ -4,11 +4,13 @@
 
 '''
 Created on 2013-11-1
+debugged on 2014-11-03
 
 @author: Jarel Zhou
+@author: winlandiano
 '''
 import string
-import LexicalParser
+import lexical_parser_kernel
 
 tokenList = []
 terminalSignMap = {}
@@ -24,33 +26,20 @@ currentTable = 'root'
 hasValueList = ['IDN','CHAR','INT','FLOAT','DOUBLE','VOID','int','float','double']
 dizhima = []
 
-def init():
+def init(code_sequence):
 #    print '-----  init() start  -----'
     global tokenList
     global terminalSignMap
     global nonTerminalSignMap
     global productList
-    initTokenList()
+    initTokenList(code_sequence)
     initTerminalSignMap()
     initNonTerminalSignMap()
     initProductList()
-#     print '-----  tokenList'
-#     for token in tokenList:
-#         print '--',token.token, token.value
-#     print '-----  terminalSignMap'
-#     for key, value in terminalSignMap.items():
-#         print '--',key,value.sign
-#     print '-----  nonTerminalSignMap'
-#     for key, value in nonTerminalSignMap.items():
-#         print '--', key, value.sign
-#     print '-----  productList'
-#     for product in productList:
-#         print '--',product.left, product.right
-#    print '-----  init() end  -----'
     
-def initTokenList():
+def initTokenList(code_sequence):
     global tokenList
-    result = LexicalParser.main()
+    result = lexical_parser_kernel.main(code_sequence)
     for eachline in result:
         if len(eachline)!=0:
             splitLine = eachline.split(' ')
@@ -77,7 +66,7 @@ def initNonTerminalSignMap():
 def initProductList():
     global productList
     global productListFor3
-    f = open('productList.txt')
+    f = open('grammar.txt')
     for line in f:
         line=line.strip('\r\n')
         if len(line) != 0:
@@ -89,7 +78,7 @@ def initProductList():
             productList.append(product)
     f.close()
     
-    f = open('productListFor3.txt')
+    f = open('grammar_with_action.txt')
     for line in f:
         line=line.strip('\r\n')
         if len(line) != 0:
@@ -579,33 +568,7 @@ def analyseSyntax():
 #                 errorList.append('x can\'t be ' + a.token)
 #                 errorList.append('--')
                 break
-        
-        # 错误处理
-#         if isError:
-#             isError = False
-#             if ['statementlist'] in stack:
-#                 print '语句错误处理'
-#                 while tokenList[i].token not in [';', '}']:
-#                     i += 1
-#                 i += 1
-#                 print 'move i to', i
-#                 while stack.pop() != ['statementlist']:
-#                     pass
-#                 stack.append(['statementlist'])
-#                 print '语句错误处理完毕'
-#             elif ['function'] in stack:
-#                 print '函数错误处理'
-#                 while tokenList[i].token != '}':
-#                     i += 1
-#                 i += 1
-#                 print 'move i to', i
-#                 while stack.pop() != ['function']:
-#                     pass
-#                 print '函数错误处理完毕'
-#             else:
-#                 print '无法处理的错误，退出'
-#                 quit()
-    
+    dizhima.append('end')
     print '\ntokenList:'
     for t in tokenList[i:]:
         print t.token
@@ -659,9 +622,35 @@ class Token:
     def __init__(self, token, value):
         self.token = token
         self.value = value
-
-if __name__ == '__main__':
-    init()
+        
+def main(code_sequence):
+    global tokenList
+    global terminalSignMap
+    global nonTerminalSignMap
+    global productList
+    global productListFor3
+    global emptySignList
+    global analyseTable
+    global resultList
+    global errorList
+    global fuhaoMap
+    global currentTable
+    global hasValueList
+    global dizhima
+    tokenList = []
+    terminalSignMap = {}
+    nonTerminalSignMap = {}
+    productList = []
+    productListFor3 = []
+    emptySignList = []
+    analyseTable = {}
+    resultList = []
+    errorList = []
+    fuhaoMap = {}
+    currentTable = 'root'
+    hasValueList = ['IDN','CHAR','INT','FLOAT','DOUBLE','VOID','int','float','double']
+    dizhima = []
+    init(code_sequence)
     calculateEmpty()
     print '----- emptySignList', emptySignList
     
@@ -688,6 +677,7 @@ if __name__ == '__main__':
     for key, value in analyseTable.items():
         print key, value
     
+    
     analyseSyntax()
     print '----- analyseSyntax'
     for result in resultList:
@@ -702,3 +692,10 @@ if __name__ == '__main__':
             print item
     else:
         print '程序文法正确'
+        
+    return dizhima
+        
+
+
+if __name__ == '__main__':
+    main('')

@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
-encoding/LexicalParser.py=utf-8
-encoding/compiler_two.py=utf-8
+encoding/lexical_parser_kernel.py=utf-8
+encoding/semantic_compiler_GUI.py=utf-8
+encoding/semantic_parser_kernel.py=utf-8
